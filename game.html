@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Number Checker</title>
+
+  <!-- Added link to the jQuery Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+
+
+    <h1>Psychic-Game</h1>
+    <p>Guess what letters I'm thinking of?</p>
+
+
+
+
+
+
+
+ <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Wins
+              <span class="badge badge-primary badge-pill" id="wincount">0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Losses
+              <span class="badge badge-primary badge-pill" id="losscount">0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Guesses Left
+              <span class="badge badge-primary badge-pill" id="maxTries">9</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                Your Guesses so far
+            <span class="badge badge-primary badge-pill" id="userguess"> </span>
+                  </li>
+          </ul>
+
+
+
+
+
+    <script type="text/javascript">
+
+var letters= ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+ 
+var maxTries= 9;
+var wincount= 0;
+var losscount= 0;
+var userguess= document.getElementById("userguess");
+var computerguess= letters[ Math.floor( Math.random() * letters.length )];
+
+function redrawScreen() {
+    document.getElementById("wincount").innerHTML = wincount
+    document.getElementById("losscount").innerHTML = losscount
+    document.getElementById("maxTries").innerHTML = maxTries
+}
+function reset() {
+    maxTries= 9;
+    userguess.innerText = ""
+    computerguess= letters[ Math.floor( Math.random() * letters.length )];
+}
+
+
+document.onkeyup= function(event){
+    
+    var key= event.key
+    userguess.innerText += key;
+     
+
+    if (key==computerguess){
+alert("you won!")
+       wincount++;
+       reset();
+    }else{
+        maxTries--
+    }
+
+    if (maxTries===0){
+        alert("you lose!")
+       losscount++
+       reset();
+    }
+     console.log("computerguess: " + computerguess);
+     console.log("userguess: " + key);
+     redrawScreen()
+      
+}
+
+
+
+    </script>
+
+</body>
